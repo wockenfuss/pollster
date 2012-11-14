@@ -4,6 +4,10 @@ Pollster::Application.routes.draw do
   resources :polls do
     resources :questions 
   end
+
+  match "admin/:admin_link/questions" => "questions#create" 
+  match "admin/:admin_link" => "polls#show", :as => "admin"
+  match "/:title" => "polls#show"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -5,19 +5,18 @@ class PollsController < ApplicationController
 	end
 
 	def create
-		@poll_params = params[:poll]
 		list = [('a'..'z'), ('A'..'Z'), (0..9)].map { |range| range.to_a }.flatten 
     admin = (0..5).map { list[Random.rand(list.length)] }.join
-		@poll_params[:admin_link] = "http://localhost:3000/#{admin}"
 		#test for uniqueness
-		@poll_params[:link] = "http://localhost:3000/#{params[:poll][:name]}"
-		@poll = Poll.new(@poll_params)
+		@poll = Poll.new(params[:poll])
+		@poll.admin_link = admin
 
 		if @poll.save
       flash[:notice] = "Poll created"
       flash[:color]= "valid"
-   		redirect_to poll_path(@poll)
+   		redirect_to admin_path(@poll.admin_link)
     else
+    	puts @poll.errors
       flash[:notice] = "There was a problem with your poll"
       flash[:color]= "invalid"
       redirect_to root_path
@@ -36,10 +35,8 @@ class PollsController < ApplicationController
 
 	# if user links from user link:
 	# list of questions
-
+		@poll = Poll.find_by_admin_link(params[:admin_link])
 		@question = Question.new
-		@questions = Question.find_all_by_poll_id(params[:id])
-		@poll = Poll.find(params[:id])
 	end
 
 	def destroy

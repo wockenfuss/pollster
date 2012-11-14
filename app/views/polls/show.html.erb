@@ -20,11 +20,15 @@
 <br>
 
 <div>
-	<%= @questions.each_with_index do |question, index| %>
+	<%= @poll.questions.each_with_index do |question, index| %>
+	<!-- jeffrey comment 0 -->
 	<p><%= "Question #{index + 1}:" %>
 	<%= question.question %> |
 	<%= link_to "View answers", "#" %> |
-	<%= link_to "Edit", "#" %> |
+	<%= link_to "Edit", edit_poll_question_path(@poll, question) %> |
 	<%= link_to 'Delete', poll_question_path(@poll, question), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+	<!-- jeffrey comment 1 -->
 	<% end %>
 </div>
+
+<!-- jeffrey comment 2 -->
