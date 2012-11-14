@@ -1,0 +1,30 @@
+<div>
+	<h1><%= @poll.name %></h1>
+</div>
+
+<div>
+	<p><%= link_to 'Delete Poll', @poll, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+</div>
+<div>
+	<p>
+		<%= link_to @poll.admin_link, @poll.admin_link %>
+		: Administrator Link (anyone with this link will be able to edit your poll)
+	</p>
+	<p>
+		<%= link_to @poll.link, @poll.link %>
+		: Poll Link
+	</p>
+</div>
+<br>
+ <%= render 'form_question' %>
+<br>
+
+<div>
+	<%= @questions.each_with_index do |question, index| %>
+	<p><%= "Question #{index + 1}:" %>
+	<%= question.question %> |
+	<%= link_to "View answers", "#" %> |
+	<%= link_to "Edit", "#" %> |
+	<%= link_to 'Delete', poll_question_path(@poll, question), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+	<% end %>
+</div>
