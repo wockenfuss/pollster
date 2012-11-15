@@ -9,6 +9,7 @@ class PollsController < ApplicationController
     admin = (0..5).map { list[Random.rand(list.length)] }.join
 		#test for uniqueness
 		link = params[:poll][:name].split(' ').join
+		link.gsub!(/\?/, "")
 		@poll = Poll.new(params[:poll])
 		@poll.admin_link = admin
 		@poll.link = link
