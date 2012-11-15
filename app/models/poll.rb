@@ -4,4 +4,9 @@ class Poll < ActiveRecord::Base
 
   validates :name, :admin_link, presence: true
   validates :admin_link, uniqueness: true
+
+  def to_param
+  	admin_link
+  end
+  
 end

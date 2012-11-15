@@ -1,0 +1,13 @@
+<div>
+	<h2><%= "Question: #{@question.question}" %></h2>
+</div>
+
+<div>
+	<% if @answers.empty? %>
+	<%= "No one has answered this question yet." %>
+	<% else %>
+		<% @answers.each_with_index do |answer, index| %>
+		<p><%= "Answer #{index+1}: #{answer.answer}" %></p>
+		<% end %>
+	<% end %>
+</div>

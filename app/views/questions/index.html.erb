@@ -1,0 +1,35 @@
+<div>
+	<h1><%= @poll.name %></h1>
+</div>
+  <fieldset>
+   	<% @poll.questions.each_with_index do |question, index| %> 	
+			<legend><%= "Question #{index + 1}:"%></legend>
+
+			<p><%= question.question %></p>
+
+      <%= form_for(@answer) do |f| %>
+        <% if @answer.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+            <ul>
+            <% @question.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <!-- <%= f.label :question %><br /> -->
+          <%= f.text_area :answer, placeholder: "Type your answer here...", class: 'span6' %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Submit Answer", class: 'btn btn-medium btn-primary' %>
+        </div>
+        <%= f.hidden_field :question_id, :value => question.id %>
+      <% end %>
+
+	<% end %>
+
+	</fieldset>

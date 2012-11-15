@@ -1,4 +1,4 @@
-<%= form_for(@question, :url => "#{@poll.admin_link}/questions") do |f| %>
+<%= form_for([@poll, @question], :url => { :controller => 'questions', :action => 'update'}) do |f| %>
   <% if @question.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -12,10 +12,10 @@
   <% end %>
 
   <div class="field">
-    <!-- <%= f.label :question %><br /> -->
-    <%= f.text_field :question, class: 'span5' %>
+    <%= f.label :question %><br />
+    <%= f.text_field :question %>
   </div>
   <div class="actions">
-    <%= f.submit class: 'btn btn-primary' %>
+    <%= f.submit 'Edit Question', class: 'btn btn-primary' %>
   </div>
 <% end %>

@@ -7,11 +7,11 @@
 </div>
 <div>
 	<p>
-		<%= link_to @poll.admin_link, @poll.admin_link %>
+		<%= link_to "http://localhost:3000/#{@poll.admin_link}", @poll.admin_link %>
 		: Administrator Link (anyone with this link will be able to edit your poll)
 	</p>
 	<p>
-		<%= link_to @poll.link, @poll.link %>
+		<%= link_to "http://localhost:3000/#{@poll.link}", "http://localhost:3000/#{@poll.link}" %>
 		: Poll Link
 	</p>
 </div>
@@ -20,15 +20,11 @@
 <br>
 
 <div>
-	<%= @poll.questions.each_with_index do |question, index| %>
-	<!-- jeffrey comment 0 -->
+	<% @poll.questions.each_with_index do |question, index| %>
 	<p><%= "Question #{index + 1}:" %>
 	<%= question.question %> |
-	<%= link_to "View answers", "#" %> |
+	<%= link_to "View answers", poll_question_path(@poll, question) %> |
 	<%= link_to "Edit", edit_poll_question_path(@poll, question) %> |
 	<%= link_to 'Delete', poll_question_path(@poll, question), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-	<!-- jeffrey comment 1 -->
 	<% end %>
 </div>
-
-<!-- jeffrey comment 2 -->
