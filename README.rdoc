@@ -1,1 +1,3 @@
 Second Dev Bootcamp Rails project building a basic polling app with an admin and public url for polls.
+
+This was an introductory Rails project so there are no tests.
